@@ -16,33 +16,19 @@ except ImportError:
     sys.exit(1)
  
  
-def get_city_id(city_id):
+def get_city_id(id):
     city_list, id_list = [], []
+    city_id =str(id)
     id_patern = re.compile('meeting\.html\?p1=(\d{1,4})')
-    url = 'http://www.timeanddate.com/worldclock/city.html?n=' + str(city_id)
-    data = r.get(url).text
+    url = 'http://www.timeanddate.com/worldclock/city.html?n=' + city_id
+    city = r.get(url).url.split('/')[-1]
     time.sleep(1) # to avoid ban (:
-    soup = bs(data)
-    try:
-        city = str(soup.find_all('title')).split('in')[1].strip().split(',')[0]
-        city_list.append(city.lower().replace(' ', '_'))
-        for i in soup.find_all('a'):
-            match = re.search(id_patern, i.get('href'))
-            if match:
-                id_list.append(match.group(1))
-                break
-        city_ids_dict = dict(zip(city_list, id_list))
-        for x,y in city_ids_dict.items(): 
-            return x + '=' + y
-    except IndexError, e:
-        print(str(soup.find_all('title')))
-        print('skipped due to {}'.format(e))
-    finally:
-        pass 
-# try  IOError
-with open('cities.db', 'a') as file, open('cities2.db', 'a') as file2:
-    #file2.write('{' + '\n')
-    for i in range(3728, 4119): #3728, 4119
+    return city + '=' + city_id
+
+
+with open('_cities.db', 'w') as file, open('_cities2.db', 'w') as file2:
+    file2.write('{' + '\n')
+    for i in range(3725, 3735): #3728, 4119
         ignored = [1440, 3875] # UTC, Zulu
         ignored.extend(range(3878, 3902)) # Alpha, Beta, etc.
         ignored.extend(range(3903, 3929)) # UTC times
