@@ -18,8 +18,7 @@ parser = argparse.ArgumentParser(description="Timezone converter beta version",
    $ python timezone.py -c new_york -d 20141205 -t 23
    
    Date format : yyyymmdd
-   Time format : hh
-   Use underscore insted space in city names ! 
+   Time format : hhmmss 
   ''')
 
 parser.add_argument("--date", "-d", type=str, help="Example: -d 20141201")
@@ -76,7 +75,7 @@ if __name__ == "__main__":
         print 'Use --help for more detail'
     else:
         city_id = get_city_id(pargs.city)
-        if city_id:
-            get_timezone(pargs.date, pargs.time, city_id)
+        if city_id and city_id == '367':
+            get_timezone(pargs.date[:8], pargs.time[:6], city_id)
         else:
             print('City - not found !')

@@ -12,7 +12,7 @@ Schedule some maintenance on the production installation in different time zone.
 Solution:
 Let's imagine that some restarts should be performed on 5th of Dec at 23-00 (New-York TZ).
 So 
-> python timezone.py -c new_york -d 20141205 -t 23
+> python timezone.py -c new-york -d 20141205 -t 23
 Output will be the following : 
 
 New York (U.S.A. - New York) Friday, December 5, 2014 at 11:00:00 PM EST UTC-5 hours
