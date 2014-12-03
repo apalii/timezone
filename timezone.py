@@ -15,15 +15,15 @@ except ImportError:
 parser = argparse.ArgumentParser(description="Timezone converter beta version",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''Examples:
-   $ python timezone.py -c new_york -d 20141205 -t 23
+   $ python timezone.py -c new-york -d 20141205 -t 23
    
    Date format : yyyymmdd
    Time format : hhmmss 
   ''')
 
-parser.add_argument("--date", "-d", type=str, help="Example: -d 20141201")
-parser.add_argument("--time", "-t", type=str, help="Example: -t 23   - it means 23:00")
-parser.add_argument("--city", "-c", type=str, help="Example: -c new_york ")
+parser.add_argument("--date", "-d", type=str, required=True, help="Example: -d 20141201")
+parser.add_argument("--time", "-t", type=str, required=True, help="Example: -t 23   - it means 23:00:00")
+parser.add_argument("--city", "-c", type=str, required=True, help="Example: -c new-york ")
 parser.add_argument("--debug", action='store_true', help="Debug")
 pargs = parser.parse_args()
 if pargs.debug:
@@ -43,18 +43,17 @@ def timer(wrapped):
 def get_city_id(city):
     try:
         with open('cities.db') as db:
+            city_pattern = re.compile(city + '=')
             for line in db:
-                if line.startswith(city):
-                    return line[len(city) + 1:]
+                if re.search(city_pattern, line.rstrip()):
+                    return line.rstrip().split('=')[1]
                     break
     except IOError, e:
-        print 'Can not open the file !'
+        print 'Can not open cities.db file !'
         sys.exit(1)
 
 
 def get_timezone(date, hour, city):
-
-    # http://www.timeanddate.com/worldclock/converted.html?iso=20141201T23&p1=240&p2=367
     base_url = 'http://www.timeanddate.com/worldclock/converted.html'
     params = '?iso={}T{}&p1={}&p2=367'.format(date,hour,city)
      
@@ -65,6 +64,7 @@ def get_timezone(date, hour, city):
     for i in soup.find_all('td'):
         time.append(''.join(i.text))
      
+    print '\n', base_url + params, '\n'
     print time[0], time[1], time[2], time[3]
     print time[4], time[5], time[6], time[7]
     print time[8], time[9], time[10] + '\n'
@@ -75,7 +75,7 @@ if __name__ == "__main__":
         print 'Use --help for more detail'
     else:
         city_id = get_city_id(pargs.city)
-        if city_id and city_id == '367':
+        if city_id and city_id != '367':
             get_timezone(pargs.date[:8], pargs.time[:6], city_id)
         else:
             print('City - not found !')

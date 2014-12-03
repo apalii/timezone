@@ -26,10 +26,10 @@ def get_city_id(id):
     return city + '=' + city_id
 
 
-with open('_cities.db', 'w') as file, open('_cities2.db', 'w') as file2:
+with open('cities.db', 'w') as file, open('cities2.db', 'w') as file2:
     file2.write('{' + '\n')
-    for i in range(3725, 3735): #3728, 4119
-        ignored = [1440, 3875] # UTC, Zulu
+    for i in range(1, 4119):
+        ignored = [1440, 3875, 367] # UTC, Zulu, Kyiv
         ignored.extend(range(3878, 3902)) # Alpha, Beta, etc.
         ignored.extend(range(3903, 3929)) # UTC times
         if i in ignored:
