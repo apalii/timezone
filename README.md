@@ -38,11 +38,11 @@ On my machine:
 echo -e "$(python -V)$(python3 -V)\n$(pip list|egrep -i 'req|beau|argp')"
 ````
 
-> Python 2.7.6
-> Python 3.4.0
-> argparse (1.2.1)
-> beautifulsoup4 (4.3.2)
-> requests (2.2.1)
+* Python 2.7.6
+* Python 3.4.0
+* argparse (1.2.1)
+* beautifulsoup4 (4.3.2)
+* requests (2.2.1)
 
 
 ### Example :
@@ -58,16 +58,16 @@ python timezone.py -c new-york -d 20141205 -t 23
 ```
 
 Output will be the following : 
-
+```
 New York (U.S.A. - New York) Friday, December 5, 2014 at 11:00:00 PM EST UTC-5 hours
 Kyiv (Ukraine) Saturday, December 6, 2014 at 6:00:00 AM EET UTC+2 hours
 Corresponding UTC (GMT) Saturday, December 6, 2014 at 04:00:00 
-
+```
 ## Details
 
-# Usage :
+### Usage :
 
-```sh
+```
 usage: timezone.py [-h] --date DATE --time TIME --city CITY [--debug]
 
 Timezone converter beta version
