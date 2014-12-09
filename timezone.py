@@ -15,14 +15,14 @@ except ImportError:
 parser = argparse.ArgumentParser(description="Timezone converter beta version",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''Examples:
-   $ python timezone.py -c new-york -d 20141205 -t 23
-   
+   $ python timezone.py -c new-york -d 20141205 -t 2330
+
    Date format : yyyymmdd
    Time format : hhmmss 
   ''')
 
 parser.add_argument("--date", "-d", type=str, required=True, help="Example: -d 20141201")
-parser.add_argument("--time", "-t", type=str, required=True, help="Example: -t 23   - it means 23:00:00")
+parser.add_argument("--time", "-t", type=str, required=True, help="Example: -t 23  - it means 23:00:00")
 parser.add_argument("--city", "-c", type=str, required=True, help="Example: -c new-york ")
 parser.add_argument("--debug", action='store_true', help="Debug")
 pargs = parser.parse_args()
@@ -48,7 +48,7 @@ def get_city_id(city):
                 if re.search(city_pattern, line.rstrip()):
                     return line.rstrip().split('=')[1]
                     break
-    except IOError, e:
+    except IOError as e:
         print 'Can not open cities.db file !'
         sys.exit(1)
 
@@ -56,8 +56,8 @@ def get_city_id(city):
 def get_timezone(date, hour, city):
     base_url = 'http://www.timeanddate.com/worldclock/converted.html'
     params = '?iso={}T{}&p1={}&p2=367'.format(date,hour,city)
-     
-    data = r.get(base_url + params).text
+    headers = {'Accept-Language':'en-US,en;q=0.5'}
+    data = r.get(base_url + params, headers=headers).text
     soup = bs(data)
     time = []
      
