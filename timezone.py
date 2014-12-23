@@ -49,7 +49,7 @@ def get_city_id(city):
                     return line.rstrip().split('=')[1]
                     break
     except IOError as e:
-        print 'Can not open cities.db file !'
+        print('Can not open cities.db file !')
         sys.exit(1)
 
 
@@ -60,19 +60,19 @@ def get_timezone(date, hour, city):
     data = r.get(base_url + params, headers=headers).text
     soup = bs(data)
     time = []
-     
+    
     for i in soup.find_all('td'):
         time.append(''.join(i.text))
-     
-    print '\n', base_url + params, '\n'
-    print time[0], time[1], time[2], time[3]
-    print time[4], time[5], time[6], time[7]
-    print time[8], time[9], time[10] + '\n'
+
+    print('\n {}\n'.format(base_url + params))
+    print(' '.join(time[:3]))
+    print(' '.join(time[4:7]))
+    print(' '.join(time[8:10]) + '\n')
 
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        print 'Use --help for more detail'
+        print('Use --help for more detail')
     else:
         city_id = get_city_id(pargs.city)
         if city_id and city_id != '367':
