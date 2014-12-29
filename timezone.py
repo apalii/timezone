@@ -43,7 +43,7 @@ def timer(wrapped):
 def get_city_id(city):
     try:
         with open('cities.db') as db:
-            city_pattern = re.compile(city + '=')
+            city_pattern = re.compile(city + '=', re.I)
             for line in db:
                 if re.search(city_pattern, line.rstrip()):
                     return line.rstrip().split('=')[1]
