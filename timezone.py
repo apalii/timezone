@@ -63,8 +63,9 @@ def get_timezone(date, hour, city):
     
     for i in soup.find_all('td'):
         time.append(''.join(i.text))
-
-    print('\n {}\n'.format(base_url + params))
+    if pargs.debug:
+        print('\n',time)
+    print('\n{}\n'.format(base_url + params))
     print(' '.join(time[:3]))
     print(' '.join(time[4:7]))
     print(' '.join(time[8:10]) + '\n')
