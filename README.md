@@ -1,12 +1,12 @@
 # Timezone converter
 
 Another useful script which helps in day-to-day routine.
-Data from timeanddate.com
+(it takes all data from `timeanddate.com`)
 
 
 ### What should be installed : 
 
-1) Of course Python (:
+1) Of course Python (works on both versions 2.7.6/3.4.0)
 
 2) Script and cities database:
 
@@ -15,7 +15,7 @@ wget --no-check-certificate --content-disposition https://raw.githubusercontent.
 wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/apalii/timezone/master/cities.db
 ```
 
-3) pip - command line tool which can install/update/uninstall Python packages.
+3) ALso you need `pip` - it is command line tool which can install/update/uninstall Python packages.
 
 ```bash
 sudo apt-get install python-pip   or  $ sudo yum install python-pip 
@@ -55,13 +55,20 @@ So run the following:
 
 ```bash
 python timezone.py -c new-york -d 20141205 -t 23
+
+where 
+   -c - city
+   -d - date in format yyymmdd
+   -t - time hhmmss
 ```
 
-Output will be the following : 
+Output will be the following (just copy/paste in TT): 
 ```
-New York (U.S.A. - New York) Friday, December 5, 2014 at 11:00:00 PM EST UTC-5 hours
-Kyiv (Ukraine) Saturday, December 6, 2014 at 6:00:00 AM EET UTC+2 hours
-Corresponding UTC (GMT) Saturday, December 6, 2014 at 04:00:00 
+http://www.timeanddate.com/worldclock/converted.html?iso=20141205T23&p1=179&p2=367
+
+New York (U.S.A. - New York) Friday, December 5, 2014 at 11:00:00 PM EST
+Kyiv (Ukraine) Saturday, December 6, 2014 at 6:00:00 AM EET
+Corresponding UTC (GMT) Saturday, December 6, 2014 at 04:00:00
 ```
 ## Details
 
