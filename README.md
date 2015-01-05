@@ -87,23 +87,6 @@ optional arguments:
 
 ```
 
-And then, using requests and bs4, creates a list with needed data :
-
-```python
-In [22]: for i in soup.find_all('td'):
-   ....:     print i.text
-   ....:     
-Sydney (Australia - New South Wales)
-Monday, December 1, 2014 at 11:00:00 PM
-AEDT
-UTC+11 hours
-Kyiv (Ukraine)
-Monday, December 1, 2014 at 2:00:00 PM
-EET
-UTC+2 hours
-Corresponding UTC (GMT)
-Monday, December 1, 2014 at 12:00:00
-```
 
 # updatedb script
 
