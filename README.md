@@ -8,11 +8,10 @@ Another useful script which helps in day-to-day routine.
 
 1) Of course Python (works on both versions 2.7.6/3.4.0)
 
-2) Script and cities database:
+2) Script:
 
 ```bash
 wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/apalii/timezone/master/timezone.py
-wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/apalii/timezone/master/cities.db
 ```
 
 3) ALso you need `pip` - it is command line tool which can install/update/uninstall Python packages.
@@ -86,27 +85,6 @@ optional arguments:
   --city CITY, -c CITY  Example: -c new-york
   --debug               Debug
 
-```
-
-Script just takes an id of the city from the cities.db file 
-
-```python
-with open('cities.db') as db:
-    city_pattern = re.compile(city + '=')
-    for line in db:
-        if re.search(city_pattern, line.rstrip()):
-            return line.rstrip().split('=')[1]]
-```
-
-DB (just text file) consist of `city=city_id` data :
-
-```bash
-...
-niagara-falls=1189
-nha-trang=4069
-new-york=179
-new-westminster=111
-...
 ```
 
 And then, using requests and bs4, creates a list with needed data :
