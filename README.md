@@ -6,7 +6,7 @@ Another useful script which helps in day-to-day routine.
 
 ### What should be installed : 
 
-1) Of course Python (works on both versions 2.7.6/3.4.0)
+1) Of course Python3
 
 2) Script:
 
@@ -14,21 +14,21 @@ Another useful script which helps in day-to-day routine.
 wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/apalii/timezone/master/timezone.py
 ```
 
-3) ALso you need `pip` - it is command line tool which can install/update/uninstall Python packages.
+3) ALso you need `pip` for python3 - it is command line tool which can install/update/uninstall Python packages.
 
 ```bash
-sudo apt-get install python-pip   or  $ sudo yum install python-pip 
+sudo apt-get install python3-pip 
 ```
 
 4) Requests module 
 
 ```bash
-sudo pip install requests
+sudo pip3 install requests
 ```
 5) beautifulsoup4 module
 
 ```bash
-sudo pip install beautifulsoup4
+sudo pip3 install beautifulsoup4
 ```
 
 On my machine:
@@ -53,7 +53,7 @@ Let's imagine that some restarts should be performed on 5th of Dec at 23-00 (New
 So run the following:
 
 ```bash
-python timezone.py -c new-york -d 20141205 -t 23
+python3 timezone.py -c new-york -d 20141205 -t 23
 
 where 
    -c - city
