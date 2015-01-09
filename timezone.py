@@ -4088,7 +4088,7 @@ cities = {
 parser = argparse.ArgumentParser(description="Timezone converter beta version",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''Examples:
-   $ python timezone.py -c new-york -d 20141205 -t 2330
+   $ python3 timezone.py -c new-york -d 20141205 -t 2330
 
    Date format : yyyymmdd
    Time format : hhmmss 
@@ -4120,7 +4120,7 @@ def get_timezone(date, hour, city):
     data = requests.get(base_url + params, headers=headers).text
     soup = bs(data)
     time = []
-    
+
     for i in soup.find_all('td'):
         time.append(''.join(i.text))
     if pargs.debug:
@@ -4139,12 +4139,17 @@ def get_timezone(date, hour, city):
             self.end_headers()
             self.wfile.write(bytes("<title>TZ</title>", "utf-8"))
             self.wfile.write(bytes("<body><p>One click to select all:</p>", "utf-8"))
-            self.wfile.write(bytes('<textarea onclick="this.select()" rows="5" style="width:75%;margin-left: 12.5%">', "utf-8"))
-            self.wfile.write(bytes(base_url + '?iso={}T{}&p1={}&p2=367'.format(pargs.date[:8], pargs.time[:6], city_id) + '\n\n', "utf-8"))
+            self.wfile.write(bytes('<textarea onclick="this.select()"', "utf-8")) 
+            self.wfile.write(bytes('rows="5" style="width:75%;margin-left: 12.5%">', "utf-8"))
+            self.wfile.write(bytes(base_url + '?iso={}T{}&p1={}&p2=367\n\n'.format(pargs.date[:8], 
+                                                                               pargs.time[:6], 
+                                                                               city_id), "utf-8"))
             self.wfile.write(bytes(' '.join(time[:3]) + '\n', "utf-8"))
             self.wfile.write(bytes(' '.join(time[4:7]) + '\n', "utf-8"))
             self.wfile.write(bytes(' '.join(time[8:10]), "utf-8"))
-            self.wfile.write(bytes("</textarea>", "utf-8"))
+            self.wfile.write(bytes("</textarea><br><br>", "utf-8"))
+            self.wfile.write(bytes('<a href="https://github.com/apalii/timezone/">', "utf-8"))
+            self.wfile.write(bytes('<small>Last version here</small></a>', "utf-8"))
 
 
     server = HTTPServer(('127.0.0.1', 0), RequestHandler)
@@ -4159,6 +4164,8 @@ if __name__ == "__main__":
         if city_id and city_id != '367':
             get_timezone(pargs.date[:8], pargs.time[:6], city_id)
             if pargs.debug:
-                webbrowser.open(base_url + '?iso={}T{}&p1={}&p2=367'.format(pargs.date[:8], pargs.time[:6], city_id))
+                webbrowser.open(base_url + '?iso={}T{}&p1={}&p2=367'.format(pargs.date[:8], 
+                                                                            pargs.time[:6], 
+                                                                            city_id))
         else:
             print('City - not found !')
